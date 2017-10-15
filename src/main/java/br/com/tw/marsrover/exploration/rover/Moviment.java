@@ -2,28 +2,45 @@ package br.com.tw.marsrover.exploration.rover;
 
 public class Moviment {
 
+    public static final String ONLY_R_AND_L_PATTERN = "([R|L+])";
+    public static final String ONLY_MOVE_PATTERN = "([M+])";
     private final String direction;
     private final int move;
 
     public Moviment(String moviment) {
-        this.direction = moviment.split("")[0];
-        this.move = moviment.split("").length -1;
+        String[] moviments = moviment.split("");
+        if (!moviments[0].matches(ONLY_R_AND_L_PATTERN)) {
+            this.direction = "";
+            this.move = extractMovesQuantity(moviment);
+            return;
+        }
+        this.direction = moviment.replaceAll(ONLY_MOVE_PATTERN, "");
+        this.move = extractMovesQuantity(moviment);
+    }
+
+    private int extractMovesQuantity(String moviment) {
+        String moves = moviment.replaceAll(ONLY_R_AND_L_PATTERN, "");
+        return moves.length();
     }
 
     public String direction() {
         return direction;
     }
 
-    public int move() {
+    public int quantity() {
         return move;
     }
 
     public boolean isRight() {
-        return "R".equals(direction);
+        return direction.startsWith("R");
     }
 
     public boolean isLeft() {
         return "L".equals(direction);
+    }
+
+    public boolean isEmpty() {
+        return direction.isEmpty();
     }
 
     @Override

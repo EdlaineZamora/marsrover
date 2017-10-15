@@ -5,6 +5,8 @@ import br.com.tw.marsrover.exploration.Position;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.Arrays.asList;
+
 public class Rover {
 
     private final Position position;
@@ -18,43 +20,27 @@ public class Rover {
     }
 
     public Rover move() {
-        CardinalPoint cardinalPoint = CardinalPoint.nextCardinalPoint(this.cardinalPoint, moviments);
-        Position position = nextPosition();
-
-        return new Rover(position, cardinalPoint, Collections.emptyList());
-    }
-
-    private Position nextPosition() {
         Position actualPosition = position;
+        CardinalPoint actualCardinalPoint = cardinalPoint;
 
         for (Moviment moviment : moviments) {
-            if (moviment.isLeft() && CardinalPoint.N.equals(cardinalPoint)) {
-                actualPosition = actualPosition.moveWidthMinus();
+            if (!moviment.isEmpty()) {
+                actualCardinalPoint = CardinalPoint.nextCardinalPoint(actualCardinalPoint, asList(moviment));
             }
-            if (moviment.isLeft() && CardinalPoint.L.equals(cardinalPoint)) {
-                actualPosition = actualPosition.moveHeightMore();
+            if (CardinalPoint.N.equals(actualCardinalPoint)) {
+                actualPosition = actualPosition.moveHeightMore(moviment.quantity());
             }
-            if (moviment.isLeft() && CardinalPoint.S.equals(cardinalPoint)) {
-                actualPosition = actualPosition.moveWidthMore();
+            if (CardinalPoint.L.equals(actualCardinalPoint)) {
+                actualPosition = actualPosition.moveWidthMore(moviment.quantity());
             }
-            if (moviment.isLeft() && CardinalPoint.O.equals(cardinalPoint)) {
-                actualPosition = actualPosition.moveHeightMinus();
+            if (CardinalPoint.S.equals(actualCardinalPoint)) {
+                actualPosition = actualPosition.moveHeightMinus(moviment.quantity());
             }
-
-            if (moviment.isRight() && CardinalPoint.N.equals(cardinalPoint)) {
-                actualPosition = actualPosition.moveWidthMore();
-            }
-            if (moviment.isRight() && CardinalPoint.L.equals(cardinalPoint)) {
-                actualPosition = actualPosition.moveHeightMinus();
-            }
-            if (moviment.isRight() && CardinalPoint.S.equals(cardinalPoint)) {
-                actualPosition = actualPosition.moveWidthMinus();
-            }
-            if (moviment.isRight() && CardinalPoint.O.equals(cardinalPoint)) {
-                actualPosition = actualPosition.moveHeightMore();
+            if (CardinalPoint.O.equals(actualCardinalPoint)) {
+                actualPosition = actualPosition.moveWidthMinus(moviment.quantity());
             }
         }
-        return actualPosition;
+        return new Rover(actualPosition, actualCardinalPoint, Collections.emptyList());
     }
 
     public Position initialPosition() {

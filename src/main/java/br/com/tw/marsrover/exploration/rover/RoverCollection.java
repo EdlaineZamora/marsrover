@@ -36,14 +36,28 @@ public class RoverCollection {
         List<Moviment> movimentsGroup = new ArrayList<>();
 
         String[] directions = moviments.split(MOVIMENT_PATTERN);
-        String[] movimentsSequence = moviments.split(DIRECTION_PATTERN);
+        String[] movimentsSequence = getMovimentsSequence(moviments);
 
         for (int i = 0; i < directions.length; i++) {
-            Moviment moviment = new Moviment(directions[i].concat(movimentsSequence[i + 1]));
+            Moviment moviment = new Moviment(directions[i].concat(movimentsSequence[i]));
             movimentsGroup.add(moviment);
         }
 
         return movimentsGroup;
+    }
+
+    private String[] getMovimentsSequence(String moviments) {
+        String[] movimentsSequence = moviments.split(DIRECTION_PATTERN);
+        List<String> resultMovimentSequence = new ArrayList<>();
+
+        for (int i = 0; i < movimentsSequence.length; i++) {
+            if (!movimentsSequence[i].isEmpty()) {
+                resultMovimentSequence.add(movimentsSequence[i]);
+            }
+        }
+
+        return resultMovimentSequence.stream()
+                .toArray(String[]::new);
     }
 
     private CardinalPoint extractCardinalPoint(String positionElements) {

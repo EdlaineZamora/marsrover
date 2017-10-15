@@ -17,7 +17,7 @@ public class PlateauTest {
 
     @Test
     public void createsHigherPositionFromInputLinesOfExplorationPlan() throws Exception {
-        List<String> inputLines = createDefaultInputExplorationPlan("RM", "0 0 N");
+        List<String> inputLines = createInputExplorationPlan("RM", "0 0 N", "2 2");
         Position expectedPosition = new Position(inputLines.get(0));
 
         Plateau plateau = new Plateau(inputLines);
@@ -27,7 +27,7 @@ public class PlateauTest {
 
     @Test
     public void createsOneRoverFromInputLinesOfExplorationPlan() throws Exception {
-        List<String> inputLines = createDefaultInputExplorationPlan("RM", "0 0 N");
+        List<String> inputLines = createInputExplorationPlan("RM", "0 0 N", "2 2");
         Position initialPosition = new Position(inputLines.get(1));
 
         Rover expectedRover = new Rover(initialPosition, CardinalPoint.N, Arrays.asList(new Moviment("RM")));
@@ -41,7 +41,7 @@ public class PlateauTest {
     public void moveOneRoverToRM() throws Exception {
         List<Rover> expectedRovers = singletonList(new Rover(new Position("1 0"), CardinalPoint.L, Collections.emptyList()));
 
-        List<String> inputExplorationPlan = createDefaultInputExplorationPlan("RM", "0 0 N");
+        List<String> inputExplorationPlan = createInputExplorationPlan("RM", "0 0 N", "2 2");
         Plateau plateau = new Plateau(inputExplorationPlan);
 
         List<Rover> rovers = plateau.explore();
@@ -53,7 +53,7 @@ public class PlateauTest {
     public void moveOneRoverToLM() throws Exception {
         List<Rover> expectedRovers = singletonList(new Rover(new Position("0 0"), CardinalPoint.O, Collections.emptyList()));
 
-        List<String> inputExplorationPlan = createDefaultInputExplorationPlan("LM", "1 0 N");
+        List<String> inputExplorationPlan = createInputExplorationPlan("LM", "1 0 N", "2 2");
         Plateau plateau = new Plateau(inputExplorationPlan);
 
         List<Rover> rovers = plateau.explore();
@@ -61,9 +61,58 @@ public class PlateauTest {
         assertEquals(expectedRovers, rovers);
     }
 
-    private List<String> createDefaultInputExplorationPlan(String moviments, String position) {
+    @Test
+    public void exploresOneRoverToLM() throws Exception {
+        List<Rover> expectedRovers = singletonList(new Rover(new Position("1 3"), CardinalPoint.N, Collections.emptyList()));
+
+        List<String> inputExplorationPlan = createInputExplorationPlan("LMLMLMLMM", "1 2 N", "5 5");
+        Plateau plateau = new Plateau(inputExplorationPlan);
+
+        List<Rover> rovers = plateau.explore();
+
+        assertEquals(expectedRovers, rovers);
+    }
+
+    @Test
+    public void exploresTwoRoversWithSomeMoves() throws Exception {
+        Rover firstExpectedRover = new Rover(new Position("1 3"), CardinalPoint.N, Collections.emptyList());
+        Rover secondExpectedRover = new Rover(new Position("5 1"), CardinalPoint.L, Collections.emptyList());
+        List<Rover> expectedRovers = Arrays.asList(firstExpectedRover, secondExpectedRover);
+
         List<String> inputLines = new ArrayList<>();
-        inputLines.add("2 2");
+        inputLines.add("5 5");
+        inputLines.add("1 2 N");
+        inputLines.add("LMLMLMLMM");
+        inputLines.add("3 3 L");
+        inputLines.add("MMRMMRMRRM");
+
+        Plateau plateau = new Plateau(inputLines);
+
+        List<Rover> rovers = plateau.explore();
+
+        assertEquals(expectedRovers, rovers);
+    }
+
+    @Test
+    public void exploresOneRoversWithSomeMoves() throws Exception {
+        Rover secondExpectedRover = new Rover(new Position("5 1"), CardinalPoint.L, Collections.emptyList());
+        List<Rover> expectedRovers = Arrays.asList(secondExpectedRover);
+
+        List<String> inputLines = new ArrayList<>();
+        inputLines.add("5 5");
+        inputLines.add("3 3 L");
+        inputLines.add("MMRMMRMRRM");
+
+        Plateau plateau = new Plateau(inputLines);
+
+        List<Rover> rovers = plateau.explore();
+
+        assertEquals(expectedRovers, rovers);
+    }
+
+    private List<String> createInputExplorationPlan(String moviments, String position, String plateauSize) {
+        List<String> inputLines = new ArrayList<>();
+        inputLines.add(plateauSize);
         inputLines.add(position);
         inputLines.add(moviments);
         return inputLines;

@@ -3,8 +3,8 @@ package br.com.tw.marsrover.exploration;
 public class Position {
 
     public static final String SPACE = " ";
-    private int height;
     private int width;
+    private int height;
 
     public Position(String cordinates) {
         String[] cordinatesValues = cordinates.split(SPACE);
@@ -17,23 +17,23 @@ public class Position {
         this.height = height;
     }
 
-    public Position moveWidthMinus() {
-        width--;
+    public Position moveWidthMinus(int move) {
+        width -= move;
         return new Position(width, height);
     }
 
-    public Position moveHeightMore() {
-        height++;
+    public Position moveHeightMore(int move) {
+        height += move;
         return new Position(width, height);
     }
 
-    public Position moveHeightMinus() {
-        height--;
+    public Position moveHeightMinus(int move) {
+        height -= move;
         return new Position(width, height);
     }
 
-    public Position moveWidthMore() {
-        width++;
+    public Position moveWidthMore(int move) {
+        width += move;
         return new Position(width, height);
     }
 

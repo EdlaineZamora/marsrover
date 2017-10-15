@@ -17,14 +17,14 @@ public class MovimentTest {
     public void createsMovimentWithOneMove() throws Exception {
         Moviment moviment = new Moviment("LM");
 
-        assertEquals(1, moviment.move());
+        assertEquals(1, moviment.quantity());
     }
 
     @Test
     public void createsMovimentWithTwoMove() throws Exception {
         Moviment moviment = new Moviment("LMM");
 
-        assertEquals(2, moviment.move());
+        assertEquals(2, moviment.quantity());
     }
 
 }
