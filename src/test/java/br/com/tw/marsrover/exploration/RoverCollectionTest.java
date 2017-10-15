@@ -1,8 +1,10 @@
 package br.com.tw.marsrover.exploration;
 
 import br.com.tw.marsrover.exploration.rover.CardinalPoint;
+import br.com.tw.marsrover.exploration.rover.Moviment;
 import br.com.tw.marsrover.exploration.rover.Rover;
 import br.com.tw.marsrover.exploration.rover.RoverCollection;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -14,11 +16,20 @@ import static org.junit.Assert.*;
 
 public class RoverCollectionTest {
 
+    private Moviment oneMovimentToRight;
+    private Moviment oneMovimentToLeft;
+
+    @Before
+    public void setUp() throws Exception {
+        oneMovimentToRight = new Moviment("RM");
+        oneMovimentToLeft = new Moviment("LM");
+    }
+
     @Test
     public void createsRoverCollectionsToOneRoverAndOneMoviment() throws Exception {
         Position initialPosition = new Position("0 0");
 
-        Rover expectedRover = new Rover(initialPosition, CardinalPoint.N, Arrays.asList("RM"));
+        Rover expectedRover = new Rover(initialPosition, CardinalPoint.N, Arrays.asList(oneMovimentToRight));
         List<String> inputForOneRoverAndOneMoviment = asList("0 0 N", "RM");
 
         RoverCollection roverCollection = new RoverCollection(inputForOneRoverAndOneMoviment);
@@ -30,7 +41,7 @@ public class RoverCollectionTest {
     public void createsRoverCollectionsToOneRoverAndTwoMoviments() throws Exception {
         Position initialPosition = new Position("0 0");
 
-        Rover expectedRover = new Rover(initialPosition, CardinalPoint.N, asList("RM", "LM"));
+        Rover expectedRover = new Rover(initialPosition, CardinalPoint.N, asList(oneMovimentToRight, oneMovimentToLeft));
         List<String> inputForOneRoverAndTwoMoviments = asList("0 0 N", "RMLM");
 
         RoverCollection roverCollection = new RoverCollection(inputForOneRoverAndTwoMoviments);
@@ -42,8 +53,8 @@ public class RoverCollectionTest {
     public void createsRoverCollectionsWithTwoRovers() throws Exception {
         Position initialPosition = new Position("0 0");
 
-        Rover expectedFirstRover = new Rover(initialPosition, CardinalPoint.N, Arrays.asList("RM"));
-        Rover expectedSecondRover = new Rover(initialPosition, CardinalPoint.S, Arrays.asList("RM"));
+        Rover expectedFirstRover = new Rover(initialPosition, CardinalPoint.N, Arrays.asList(oneMovimentToRight));
+        Rover expectedSecondRover = new Rover(initialPosition, CardinalPoint.S, Arrays.asList(oneMovimentToRight));
 
         List<String> inputForTwoRoversAndOneMovimentForEach = asList("0 0 N", "RM", "0 0 S", "RM");
 

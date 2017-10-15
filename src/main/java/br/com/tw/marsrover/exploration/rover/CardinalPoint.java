@@ -2,35 +2,42 @@ package br.com.tw.marsrover.exploration.rover;
 
 import java.util.List;
 
+import static java.util.Arrays.stream;
+
 public enum CardinalPoint {
 
-    N,
-    L,
-    S,
-    O;
+    N, L, S, O;
 
-    public static CardinalPoint nextCardinalPoint(CardinalPoint cardinalPoint, List<String> moviments) {
-        CardinalPoint finalCardinalPoint = cardinalPoint;
+    public static final int LAST_CARDINAL_POINT = 3;
+    public static final int FIRST_CARDINAL_POINT = 0;
 
-        for (String moviment : moviments) {
-            if ("R".equals(moviment.toString().split("")[0])) {
-                for (int i = 0; i < values().length; i++) {
-                    if (values()[i] == cardinalPoint) {
-                        finalCardinalPoint = values()[i+1];
-                    }
-                }
+    public static CardinalPoint nextCardinalPoint(CardinalPoint cardinalPoint, List<Moviment> moviments) {
+        CardinalPoint cardinalPointFound = stream(values())
+                .filter(cardinalPoint1 -> cardinalPoint.equals(cardinalPoint))
+                .findAny().get();
+
+        for (Moviment moviment : moviments) {
+            if (moviment.isRight()) {
+                cardinalPointFound = nextCardinalPointForRightDirection(cardinalPointFound);
             } else {
-                for (int i = 0; i < values().length; i++) {
-                    if (values()[i] == cardinalPoint) {
-                        if (i == 0) {
-                            return values()[3];
-                        }
-                        return values()[i - 1];
-                    }
-                }
+                cardinalPointFound = nextCardinalPointForLeftDirection(cardinalPointFound);
             }
         }
-        return finalCardinalPoint;
+        return cardinalPointFound;
+    }
+
+    private static CardinalPoint nextCardinalPointForLeftDirection(CardinalPoint cardinalPointFound) {
+        if (cardinalPointFound.ordinal() == FIRST_CARDINAL_POINT) {
+            return O;
+        }
+        return values()[cardinalPointFound.ordinal() - 1];
+    }
+
+    private static CardinalPoint nextCardinalPointForRightDirection(CardinalPoint cardinalPointFound) {
+        if (cardinalPointFound.ordinal() == LAST_CARDINAL_POINT) {
+            return N;
+        }
+        return values()[cardinalPointFound.ordinal() + 1];
     }
 
 }

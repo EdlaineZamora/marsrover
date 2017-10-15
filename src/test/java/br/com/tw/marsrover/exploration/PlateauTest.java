@@ -1,6 +1,7 @@
 package br.com.tw.marsrover.exploration;
 
 import br.com.tw.marsrover.exploration.rover.CardinalPoint;
+import br.com.tw.marsrover.exploration.rover.Moviment;
 import br.com.tw.marsrover.exploration.rover.Rover;
 import org.junit.Test;
 
@@ -29,7 +30,7 @@ public class PlateauTest {
         List<String> inputLines = createDefaultInputExplorationPlan("RM", "0 0 N");
         Position initialPosition = new Position(inputLines.get(1));
 
-        Rover expectedRover = new Rover(initialPosition, CardinalPoint.N, Arrays.asList("RM"));
+        Rover expectedRover = new Rover(initialPosition, CardinalPoint.N, Arrays.asList(new Moviment("RM")));
 
         Plateau plateau = new Plateau(inputLines);
 

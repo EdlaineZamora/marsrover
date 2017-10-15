@@ -32,14 +32,15 @@ public class RoverCollection {
                 .collect(Collectors.toList());
     }
 
-    private List<String> extractMoviments(String moviments) {
-        List<String> movimentsGroup = new ArrayList<>();
+    private List<Moviment> extractMoviments(String moviments) {
+        List<Moviment> movimentsGroup = new ArrayList<>();
 
         String[] directions = moviments.split(MOVIMENT_PATTERN);
         String[] movimentsSequence = moviments.split(DIRECTION_PATTERN);
 
         for (int i = 0; i < directions.length; i++) {
-            movimentsGroup.add(directions[i].concat(movimentsSequence[i+1]));
+            Moviment moviment = new Moviment(directions[i].concat(movimentsSequence[i + 1]));
+            movimentsGroup.add(moviment);
         }
 
         return movimentsGroup;

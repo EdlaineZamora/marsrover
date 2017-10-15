@@ -9,9 +9,9 @@ public class Rover {
 
     private final Position position;
     private final CardinalPoint cardinalPoint;
-    private final List<String> moviments;
+    private final List<Moviment> moviments;
 
-    public Rover(Position position, CardinalPoint cardinalPoint, List<String> moviments) {
+    public Rover(Position position, CardinalPoint cardinalPoint, List<Moviment> moviments) {
         this.position = position;
         this.cardinalPoint = cardinalPoint;
         this.moviments = moviments;
@@ -26,31 +26,31 @@ public class Rover {
 
     private Position nextPosition() {
         Position actualPosition = position;
-        for (String moviment : moviments) {
-            String[] moves = moviment.split("");
-            if ("L".equals(moves[0]) && CardinalPoint.N.equals(cardinalPoint)) {
+
+        for (Moviment moviment : moviments) {
+            if (moviment.isLeft() && CardinalPoint.N.equals(cardinalPoint)) {
                 actualPosition = actualPosition.moveWidthMinus();
             }
-            if ("L".equals(moves[0]) && CardinalPoint.L.equals(cardinalPoint)) {
+            if (moviment.isLeft() && CardinalPoint.L.equals(cardinalPoint)) {
                 actualPosition = actualPosition.moveHeightMore();
             }
-            if ("L".equals(moves[0]) && CardinalPoint.S.equals(cardinalPoint)) {
+            if (moviment.isLeft() && CardinalPoint.S.equals(cardinalPoint)) {
                 actualPosition = actualPosition.moveWidthMore();
             }
-            if ("L".equals(moves[0]) && CardinalPoint.O.equals(cardinalPoint)) {
+            if (moviment.isLeft() && CardinalPoint.O.equals(cardinalPoint)) {
                 actualPosition = actualPosition.moveHeightMinus();
             }
 
-            if ("R".equals(moves[0]) && CardinalPoint.N.equals(cardinalPoint)) {
+            if (moviment.isRight() && CardinalPoint.N.equals(cardinalPoint)) {
                 actualPosition = actualPosition.moveWidthMore();
             }
-            if ("R".equals(moves[0]) && CardinalPoint.L.equals(cardinalPoint)) {
+            if (moviment.isRight() && CardinalPoint.L.equals(cardinalPoint)) {
                 actualPosition = actualPosition.moveHeightMinus();
             }
-            if ("R".equals(moves[0]) && CardinalPoint.S.equals(cardinalPoint)) {
+            if (moviment.isRight() && CardinalPoint.S.equals(cardinalPoint)) {
                 actualPosition = actualPosition.moveWidthMinus();
             }
-            if ("R".equals(moves[0]) && CardinalPoint.O.equals(cardinalPoint)) {
+            if (moviment.isRight() && CardinalPoint.O.equals(cardinalPoint)) {
                 actualPosition = actualPosition.moveHeightMore();
             }
         }
@@ -65,7 +65,7 @@ public class Rover {
         return cardinalPoint;
     }
 
-    public List<String> moviments() {
+    public List<Moviment> moviments() {
         return moviments;
     }
 

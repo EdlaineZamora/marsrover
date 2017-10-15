@@ -12,24 +12,29 @@ public class Position {
         height = Integer.valueOf(cordinatesValues[1]);
     }
 
+    private Position(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
+
     public Position moveWidthMinus() {
         width--;
-        return new Position(String.valueOf(width) + " " + String.valueOf(height));
+        return new Position(width, height);
     }
 
     public Position moveHeightMore() {
         height++;
-        return new Position(String.valueOf(width) + " " + String.valueOf(height));
+        return new Position(width, height);
     }
 
     public Position moveHeightMinus() {
         height--;
-        return new Position(String.valueOf(width) + " " + String.valueOf(height));
+        return new Position(width, height);
     }
 
     public Position moveWidthMore() {
         width++;
-        return new Position(String.valueOf(width) + " " + String.valueOf(height));
+        return new Position(width, height);
     }
 
     @Override
