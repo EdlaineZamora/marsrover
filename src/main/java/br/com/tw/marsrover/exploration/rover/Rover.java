@@ -77,11 +77,7 @@ public class Rover {
 
     @Override
     public String toString() {
-        return "Rover{" +
-                "position=" + position +
-                ", cardinalPoint=" + cardinalPoint +
-                ", moviments=" + moviments +
-                '}';
+        return position.toString() + " " + cardinalPoint.name();
     }
 
 }

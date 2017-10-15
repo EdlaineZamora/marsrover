@@ -32,6 +32,10 @@ public class RoverCollection {
                 .collect(Collectors.toList());
     }
 
+    public void print() {
+        rovers.forEach(Rover::toString);
+    }
+
     private List<Moviment> extractMoviments(String moviments) {
         List<Moviment> movimentsGroup = new ArrayList<>();
 

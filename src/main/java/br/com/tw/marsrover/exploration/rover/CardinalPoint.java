@@ -8,14 +8,16 @@ public enum CardinalPoint {
 
     public static final int LAST_CARDINAL_POINT = 3;
     public static final int FIRST_CARDINAL_POINT = 0;
+    public static final String RIGHT = "R";
+    public static final String EMPTY = "";
 
     public static CardinalPoint nextCardinalPoint(CardinalPoint cardinalPoint, List<Moviment> moviments) {
         CardinalPoint cardinalPointFound = cardinalPoint;
 
         for (Moviment moviment : moviments) {
-            String[] direction = moviment.direction().split("");
+            String[] direction = moviment.direction().split(EMPTY);
             for (int i = 0; i < direction.length; i++) {
-                if (direction[i].equals("R")) {
+                if (direction[i].equals(RIGHT)) {
                     cardinalPointFound = nextCardinalPointForRightDirection(cardinalPointFound);
                 } else {
                     cardinalPointFound = nextCardinalPointForLeftDirection(cardinalPointFound);

@@ -55,4 +55,9 @@ public class Position {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return width + " " + height;
+    }
+
 }

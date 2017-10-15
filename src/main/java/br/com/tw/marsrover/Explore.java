@@ -1,6 +1,7 @@
 package br.com.tw.marsrover;
 
 import br.com.tw.marsrover.exploration.Plateau;
+import br.com.tw.marsrover.exploration.rover.Rover;
 import br.com.tw.marsrover.input.ExplorationInput;
 import br.com.tw.marsrover.input.ExplorationInputException;
 
@@ -18,8 +19,8 @@ public class Explore {
             ExplorationInput explorationInput = new ExplorationInput(filePath);
             List<String> lines = explorationInput.extractLinesFromInputFile();
             Plateau plateau = new Plateau(lines);
-            plateau.explore();
-
+            List<Rover> rovers = plateau.explore();
+            rovers.forEach(rover -> System.out.println(rover.toString()));
         } catch (ExplorationInputException exception) {
             System.out.println(exception.getMessage());
         }
