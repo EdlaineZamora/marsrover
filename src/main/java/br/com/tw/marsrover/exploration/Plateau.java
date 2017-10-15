@@ -5,12 +5,12 @@ import br.com.tw.marsrover.exploration.rover.RoverCollection;
 
 import java.util.List;
 
-public class Plan {
+public class Plateau {
 
     private final Position higherPosition;
     private final RoverCollection rovers;
 
-    public Plan(List<String> inputLines) {
+    public Plateau(List<String> inputLines) {
         higherPosition = new Position(inputLines.get(0));
         inputLines.remove(0);
         rovers = new RoverCollection(inputLines);

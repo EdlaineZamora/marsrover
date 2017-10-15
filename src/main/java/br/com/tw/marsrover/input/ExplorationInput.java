@@ -17,7 +17,7 @@ public class ExplorationInput {
         file = new File(filePath);
     }
 
-    public List<String> extractLinesFromInputFile() throws ReadFileException {
+    public List<String> extractLinesFromInputFile() throws ExplorationInputException {
         try {
             Path path = Paths.get(file.toURI());
 
@@ -25,7 +25,7 @@ public class ExplorationInput {
                     .collect(Collectors.toList());
 
         } catch (IOException exception) {
-            throw new ReadFileException(createErrorMessage(), exception);
+            throw new ExplorationInputException(createErrorMessage(), exception);
         }
     }
 

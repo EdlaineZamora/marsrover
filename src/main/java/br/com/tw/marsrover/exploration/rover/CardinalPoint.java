@@ -1,5 +1,7 @@
 package br.com.tw.marsrover.exploration.rover;
 
+import java.util.List;
+
 public enum CardinalPoint {
 
     N,
@@ -7,16 +9,28 @@ public enum CardinalPoint {
     S,
     O;
 
-    public static CardinalPoint nextCardinalPoint(CardinalPoint cardinalPoint, String[] moviments) {
-        String direction = moviments[0];
-        if ("R".equals(direction)) {
-            for (int i = 0; i < values().length; i++) {
-                if (values()[i] == cardinalPoint) {
-                    return values()[i+1];
+    public static CardinalPoint nextCardinalPoint(CardinalPoint cardinalPoint, List<String> moviments) {
+        CardinalPoint finalCardinalPoint = cardinalPoint;
+
+        for (String moviment : moviments) {
+            if ("R".equals(moviment.toString().split("")[0])) {
+                for (int i = 0; i < values().length; i++) {
+                    if (values()[i] == cardinalPoint) {
+                        finalCardinalPoint = values()[i+1];
+                    }
+                }
+            } else {
+                for (int i = 0; i < values().length; i++) {
+                    if (values()[i] == cardinalPoint) {
+                        if (i == 0) {
+                            return values()[3];
+                        }
+                        return values()[i - 1];
+                    }
                 }
             }
         }
-        return cardinalPoint;
+        return finalCardinalPoint;
     }
 
 }

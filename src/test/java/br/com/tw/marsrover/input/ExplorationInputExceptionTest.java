@@ -11,9 +11,9 @@ public class ExplorationInputExceptionTest {
         Exception exception = new Exception();
         String expectedMessage = "Não foi possível ler o arquivo X";
 
-        ReadFileException readFileException = new ReadFileException(expectedMessage, exception);
+        ExplorationInputException explorationInputException = new ExplorationInputException(expectedMessage, exception);
 
-        assertEquals(expectedMessage, readFileException.getMessage());
+        assertEquals(expectedMessage, explorationInputException.getMessage());
     }
 
 }

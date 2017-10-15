@@ -9,13 +9,15 @@ import java.util.stream.Collectors;
 public class RoverCollection {
 
     public static final String ONLY_LETTERS_PATTERN = "[^A-Z]";
+    public static final String MOVIMENT_PATTERN = "M+";
+    public static final String DIRECTION_PATTERN = "[LR+]";
     public static final String EMPTY = "";
     private List<Rover> rovers = new ArrayList<>();
 
     public RoverCollection(List<String> inputLines) {
-        for (int i = 0; i < inputLines.size(); i+=2) {
+        for (int i = 0; i < inputLines.size(); i+= 2) {
             Position position = new Position(inputLines.get(i));
-            Rover rover = new Rover(position, extractCardinalPoint(inputLines.get(i)), inputLines.get(i + 1));
+            Rover rover = new Rover(position, extractCardinalPoint(inputLines.get(i)), extractMoviments(inputLines.get(i + 1)));
             rovers.add(rover);
         }
     }
@@ -28,6 +30,19 @@ public class RoverCollection {
         return rovers.stream()
                 .map(Rover::move)
                 .collect(Collectors.toList());
+    }
+
+    private List<String> extractMoviments(String moviments) {
+        List<String> movimentsGroup = new ArrayList<>();
+
+        String[] directions = moviments.split(MOVIMENT_PATTERN);
+        String[] movimentsSequence = moviments.split(DIRECTION_PATTERN);
+
+        for (int i = 0; i < directions.length; i++) {
+            movimentsGroup.add(directions[i].concat(movimentsSequence[i+1]));
+        }
+
+        return movimentsGroup;
     }
 
     private CardinalPoint extractCardinalPoint(String positionElements) {
