@@ -18,9 +18,12 @@ public class Explore {
         try {
             ExplorationInput explorationInput = new ExplorationInput(filePath);
             List<String> lines = explorationInput.extractLinesFromInputFile();
+
             Plateau plateau = new Plateau(lines);
             List<Rover> rovers = plateau.explore();
+
             rovers.forEach(rover -> System.out.println(rover.toString()));
+
         } catch (ExplorationInputException exception) {
             System.out.println(exception.getMessage());
         }

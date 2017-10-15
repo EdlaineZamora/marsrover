@@ -25,7 +25,7 @@ public class Plateau {
     }
 
     public List<Rover> rovers() {
-        return rovers.rovers();
+        return rovers.roversCopy();
     }
 
 }

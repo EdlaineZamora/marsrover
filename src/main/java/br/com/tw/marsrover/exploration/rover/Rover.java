@@ -30,13 +30,13 @@ public class Rover {
             if (CardinalPoint.N.equals(actualCardinalPoint)) {
                 actualPosition = actualPosition.moveHeightMore(moviment.quantity());
             }
-            if (CardinalPoint.L.equals(actualCardinalPoint)) {
+            if (CardinalPoint.E.equals(actualCardinalPoint)) {
                 actualPosition = actualPosition.moveWidthMore(moviment.quantity());
             }
             if (CardinalPoint.S.equals(actualCardinalPoint)) {
                 actualPosition = actualPosition.moveHeightMinus(moviment.quantity());
             }
-            if (CardinalPoint.O.equals(actualCardinalPoint)) {
+            if (CardinalPoint.W.equals(actualCardinalPoint)) {
                 actualPosition = actualPosition.moveWidthMinus(moviment.quantity());
             }
         }

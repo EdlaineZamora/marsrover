@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class RoverCollection {
 
-    public static final String ONLY_LETTERS_PATTERN = "[^A-Z]";
-    public static final String MOVIMENT_PATTERN = "M+";
-    public static final String DIRECTION_PATTERN = "[LR+]";
-    public static final String EMPTY = "";
+    private static final String ONLY_LETTERS_PATTERN = "[^A-Z]";
+    private static final String MOVIMENT_PATTERN = "M+";
+    private static final String DIRECTION_PATTERN = "[LR+]";
+    private static final String EMPTY = "";
     private List<Rover> rovers = new ArrayList<>();
 
     public RoverCollection(List<String> inputLines) {
@@ -22,7 +22,7 @@ public class RoverCollection {
         }
     }
 
-    public List<Rover> rovers() {
+    public List<Rover> roversCopy() {
         return new ArrayList<>(rovers);
     }
 
@@ -30,10 +30,6 @@ public class RoverCollection {
         return rovers.stream()
                 .map(Rover::move)
                 .collect(Collectors.toList());
-    }
-
-    public void print() {
-        rovers.forEach(Rover::toString);
     }
 
     private List<Moviment> extractMoviments(String moviments) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 public enum CardinalPoint {
 
-    N, L, S, O;
+    N, E, S, W;
 
     public static final int LAST_CARDINAL_POINT = 3;
     public static final int FIRST_CARDINAL_POINT = 0;
@@ -30,7 +30,7 @@ public enum CardinalPoint {
 
     private static CardinalPoint nextCardinalPointForLeftDirection(CardinalPoint cardinalPointFound) {
         if (cardinalPointFound.ordinal() == FIRST_CARDINAL_POINT) {
-            return O;
+            return W;
         }
         return values()[cardinalPointFound.ordinal() - 1];
     }

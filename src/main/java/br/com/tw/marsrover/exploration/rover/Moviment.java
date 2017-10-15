@@ -36,7 +36,7 @@ public class Moviment {
     }
 
     public boolean isLeft() {
-        return "L".equals(direction);
+        return "E".equals(direction);
     }
 
     public boolean isEmpty() {

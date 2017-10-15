@@ -11,7 +11,7 @@ public class CardinalPointTest {
     public void nextCardinalPointIsLWhenActualIsNAndThereIsOneMovimentToRight() throws Exception {
         CardinalPoint cardinalPoint = CardinalPoint.nextCardinalPoint(CardinalPoint.N, asList(new Moviment("RM")));
 
-        assertEquals(CardinalPoint.L, cardinalPoint);
+        assertEquals(CardinalPoint.E, cardinalPoint);
     }
 
     @Test
@@ -19,7 +19,7 @@ public class CardinalPointTest {
         Moviment moviment = new Moviment("LM");
         CardinalPoint cardinalPoint = CardinalPoint.nextCardinalPoint(CardinalPoint.N, asList(moviment));
 
-        assertEquals(CardinalPoint.O, cardinalPoint);
+        assertEquals(CardinalPoint.W, cardinalPoint);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class CardinalPointTest {
         Moviment moviment = new Moviment("LM");
         CardinalPoint cardinalPoint = CardinalPoint.nextCardinalPoint(CardinalPoint.N, asList(moviment, moviment, moviment));
 
-        assertEquals(CardinalPoint.L, cardinalPoint);
+        assertEquals(CardinalPoint.E, cardinalPoint);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class CardinalPointTest {
         Moviment moviment = new Moviment("RM");
         CardinalPoint cardinalPoint = CardinalPoint.nextCardinalPoint(CardinalPoint.N, asList(moviment, moviment, moviment));
 
-        assertEquals(CardinalPoint.O, cardinalPoint);
+        assertEquals(CardinalPoint.W, cardinalPoint);
     }
 
     @Test

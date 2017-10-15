@@ -34,7 +34,7 @@ public class RoverCollectionTest {
 
         RoverCollection roverCollection = new RoverCollection(inputForOneRoverAndOneMoviment);
 
-        assertEquals(expectedRover, roverCollection.rovers().get(0));
+        assertEquals(expectedRover, roverCollection.roversCopy().get(0));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class RoverCollectionTest {
 
         RoverCollection roverCollection = new RoverCollection(inputForOneRoverAndTwoMoviments);
 
-        assertEquals(expectedRover, roverCollection.rovers().get(0));
+        assertEquals(expectedRover, roverCollection.roversCopy().get(0));
     }
 
     @Test
@@ -60,12 +60,12 @@ public class RoverCollectionTest {
 
         RoverCollection roverCollection = new RoverCollection(inputForTwoRoversAndOneMovimentForEach);
 
-        assertEquals(asList(expectedFirstRover, expectedSecondRover), roverCollection.rovers());
+        assertEquals(asList(expectedFirstRover, expectedSecondRover), roverCollection.roversCopy());
     }
 
     @Test
     public void movesRoverWithOneMovimentRM() throws Exception {
-        Rover expectedRover = new Rover(new Position("1 0"), CardinalPoint.L, Collections.emptyList());
+        Rover expectedRover = new Rover(new Position("1 0"), CardinalPoint.E, Collections.emptyList());
 
         RoverCollection roverCollection = new RoverCollection(asList("0 0 N", "RM"));
 
@@ -76,7 +76,7 @@ public class RoverCollectionTest {
 
     @Test
     public void movesRoverWithOneMovimentLM() throws Exception {
-        Rover expectedRover = new Rover(new Position("0 0"), CardinalPoint.O, Collections.emptyList());
+        Rover expectedRover = new Rover(new Position("0 0"), CardinalPoint.W, Collections.emptyList());
 
         RoverCollection roverCollection = new RoverCollection(asList("1 0 N", "LM"));
 

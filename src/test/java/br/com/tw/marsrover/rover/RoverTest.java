@@ -51,7 +51,7 @@ public class RoverTest {
     @Test
     public void movesRoverWithMovimentRM() throws Exception {
         Rover rover = new Rover(initialPosition, CardinalPoint.N, asList(oneMovimentToRight));
-        Rover expectedRover = new Rover(new Position("1 0"), CardinalPoint.L, Collections.emptyList());
+        Rover expectedRover = new Rover(new Position("1 0"), CardinalPoint.E, Collections.emptyList());
 
         assertEquals(expectedRover, rover.move());
     }
@@ -59,7 +59,7 @@ public class RoverTest {
     @Test
     public void movesRoverWithMovimentLM() throws Exception {
         Rover rover = new Rover(new Position("1 0"), CardinalPoint.N, asList(oneMovimentToLeft));
-        Rover expectedRover = new Rover(new Position("0 0"), CardinalPoint.O, Collections.emptyList());
+        Rover expectedRover = new Rover(new Position("0 0"), CardinalPoint.W, Collections.emptyList());
 
         assertEquals(expectedRover, rover.move());
     }
