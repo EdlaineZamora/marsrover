@@ -1,6 +1,6 @@
 package br.com.tw.marsrover;
 
-import br.com.tw.marsrover.exploration.ExplorationPlan;
+import br.com.tw.marsrover.exploration.Plan;
 import br.com.tw.marsrover.input.ExplorationInput;
 import br.com.tw.marsrover.input.ReadFileException;
 
@@ -17,8 +17,8 @@ public class Explore {
         try {
             ExplorationInput explorationInput = new ExplorationInput(filePath);
             List<String> lines = explorationInput.extractLinesFromInputFile();
-            ExplorationPlan explorationPlan = new ExplorationPlan(lines);
-            explorationPlan.explore();
+            Plan plan = new Plan(lines);
+            plan.explore();
 
         } catch (ReadFileException exception) {
             System.out.println(exception.getMessage());

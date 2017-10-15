@@ -6,10 +6,10 @@ public class Position {
     private final int height;
     private final int width;
 
-    public Position(String higherCordinatesOfExplorationPlan) {
-        String[] cordinates = higherCordinatesOfExplorationPlan.split(SPACE);
-        height = Integer.valueOf(cordinates[0]);
-        width = Integer.valueOf(cordinates[0]);
+    public Position(String cordinates) {
+        String[] cordinatesValues = cordinates.split(SPACE);
+        height = Integer.valueOf(cordinatesValues[0]);
+        width = Integer.valueOf(cordinatesValues[0]);
     }
 
     @Override
