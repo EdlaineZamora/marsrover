@@ -12,10 +12,11 @@ public class RoverCollection {
     private static final String MOVIMENT_PATTERN = "M+";
     private static final String DIRECTION_PATTERN = "[LR+]";
     private static final String EMPTY = "";
+    public static final int QUANTITY_ATTRIBUTES_ROVER = 2;
     private List<Rover> rovers = new ArrayList<>();
 
     public RoverCollection(List<String> inputLines) {
-        for (int i = 0; i < inputLines.size(); i+= 2) {
+        for (int i = 0; i < inputLines.size(); i+= QUANTITY_ATTRIBUTES_ROVER) {
             Position position = new Position(inputLines.get(i));
             Rover rover = new Rover(position, extractCardinalPoint(inputLines.get(i)), extractMoviments(inputLines.get(i + 1)));
             rovers.add(rover);
@@ -33,20 +34,13 @@ public class RoverCollection {
     }
 
     private List<Moviment> extractMoviments(String moviments) {
-        List<Moviment> movimentsGroup = new ArrayList<>();
-
         String[] directions = moviments.split(MOVIMENT_PATTERN);
-        String[] movimentsSequence = getMovimentsSequence(moviments);
+        String[] movimentsSequence = extractMovimentsSequence(moviments);
 
-        for (int i = 0; i < directions.length; i++) {
-            Moviment moviment = new Moviment(directions[i].concat(movimentsSequence[i]));
-            movimentsGroup.add(moviment);
-        }
-
-        return movimentsGroup;
+        return createMovimentsGroup(directions, movimentsSequence);
     }
 
-    private String[] getMovimentsSequence(String moviments) {
+    private String[] extractMovimentsSequence(String moviments) {
         String[] movimentsSequence = moviments.split(DIRECTION_PATTERN);
         List<String> resultMovimentSequence = new ArrayList<>();
 
@@ -58,6 +52,15 @@ public class RoverCollection {
 
         return resultMovimentSequence.stream()
                 .toArray(String[]::new);
+    }
+
+    private List<Moviment> createMovimentsGroup(String[] directions, String[] movimentsSequence) {
+        List<Moviment> movimentsGroup = new ArrayList<>();
+        for (int i = 0; i < directions.length; i++) {
+            Moviment moviment = new Moviment(directions[i].concat(movimentsSequence[i]));
+            movimentsGroup.add(moviment);
+        }
+        return movimentsGroup;
     }
 
     private CardinalPoint extractCardinalPoint(String positionElements) {

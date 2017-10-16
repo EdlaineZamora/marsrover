@@ -51,4 +51,3 @@ MMRMMRMRRM
 ### Executar o programa
 
 - Executar o arquivo ```run.sh``` que pode ser encontrado no diretório raíz do projeto
-

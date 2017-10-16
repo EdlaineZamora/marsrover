@@ -7,12 +7,10 @@ import java.util.List;
 
 public class Plateau {
 
-    private final Position higherPosition;
     private final RoverCollection rovers;
 
     public Plateau(List<String> inputLines) {
-        higherPosition = new Position(inputLines.get(0));
-        inputLines.remove(0);
+        removeHigherPosition(inputLines);
         rovers = new RoverCollection(inputLines);
     }
 
@@ -20,12 +18,12 @@ public class Plateau {
         return rovers.move();
     }
 
-    public Position higherPosition() {
-        return higherPosition;
-    }
-
     public List<Rover> rovers() {
         return rovers.roversCopy();
+    }
+
+    private String removeHigherPosition(List<String> inputLines) {
+        return inputLines.remove(0);
     }
 
 }

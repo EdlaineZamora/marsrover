@@ -16,16 +16,6 @@ import static org.junit.Assert.*;
 public class PlateauTest {
 
     @Test
-    public void createsHigherPositionFromInputLinesOfExplorationPlan() throws Exception {
-        List<String> inputLines = createInputExplorationPlan("RM", "0 0 N", "2 2");
-        Position expectedPosition = new Position(inputLines.get(0));
-
-        Plateau plateau = new Plateau(inputLines);
-
-        assertEquals(expectedPosition, plateau.higherPosition());
-    }
-
-    @Test
     public void createsOneRoverFromInputLinesOfExplorationPlan() throws Exception {
         List<String> inputLines = createInputExplorationPlan("RM", "0 0 N", "2 2");
         Position initialPosition = new Position(inputLines.get(1));

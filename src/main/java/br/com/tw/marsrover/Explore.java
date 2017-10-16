@@ -11,22 +11,38 @@ import java.util.Scanner;
 public class Explore {
 
     public static void main(String... args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the path and filename of the Mars Exploration Plateau (Example: /filePath/filename): ");
-        String filePath = scanner.next();
+        String filePath = readFilePath();
 
         try {
-            ExplorationInput explorationInput = new ExplorationInput(filePath);
-            List<String> lines = explorationInput.extractLinesFromInputFile();
+            List<String> lines = extractLinesFromFile(filePath);
 
-            Plateau plateau = new Plateau(lines);
-            List<Rover> rovers = plateau.explore();
+            List<Rover> rovers = explorePlateau(lines);
 
-            rovers.forEach(rover -> System.out.println(rover.toString()));
+            printResultRovers(rovers);
 
         } catch (ExplorationInputException exception) {
             System.out.println(exception.getMessage());
         }
+    }
+
+    private static List<Rover> explorePlateau(List<String> lines) {
+        Plateau plateau = new Plateau(lines);
+        return plateau.explore();
+    }
+
+    private static List<String> extractLinesFromFile(String filePath) throws ExplorationInputException {
+        ExplorationInput explorationInput = new ExplorationInput(filePath);
+        return explorationInput.extractLinesFromInputFile();
+    }
+
+    private static void printResultRovers(List<Rover> rovers) {
+        rovers.forEach(rover -> System.out.println(rover.toString()));
+    }
+
+    private static String readFilePath() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the path and filename of the Mars Exploration Plateau (Example: /filePath/filename): ");
+        return scanner.next();
     }
 
 }
