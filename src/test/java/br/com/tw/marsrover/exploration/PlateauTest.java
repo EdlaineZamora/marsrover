@@ -1,35 +1,39 @@
 package br.com.tw.marsrover.exploration;
 
-import br.com.tw.marsrover.exploration.rover.CardinalPoint;
+import br.com.tw.marsrover.exploration.rover.Direction;
 import br.com.tw.marsrover.exploration.rover.Moviment;
 import br.com.tw.marsrover.exploration.rover.Rover;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.*;
 
 public class PlateauTest {
 
     @Test
-    public void createsOneRoverFromInputLinesOfExplorationPlan() throws Exception {
-        List<String> inputLines = createInputExplorationPlan("RM", "0 0 N", "2 2");
-        Position initialPosition = new Position(inputLines.get(1));
+    public void plateauCreatesRoverAtPosition00NWhenSecondLineIs00N() throws Exception {
+        List<String> explorationPlan = createInputExplorationPlan("RM", "0 0 N", "2 2");
+        String initialCoordinatesOfFirstRover = explorationPlan.get(1);
 
-        Rover expectedRover = new Rover(initialPosition, CardinalPoint.N, Arrays.asList(new Moviment("RM")));
+        Position initialPosition = new Position(initialCoordinatesOfFirstRover);
+        Direction direction = Direction.N;
+        List<Moviment> commands = singletonList(new Moviment("RM"));
+        Rover expectedRover = new Rover(initialPosition, direction, commands);
 
-        Plateau plateau = new Plateau(inputLines);
+        Plateau plateau = new Plateau(explorationPlan);
 
-        assertEquals(expectedRover, plateau.rovers().get(0));
+        Rover createdRover = plateau.rovers().get(0);
+        assertEquals(expectedRover, createdRover);
     }
 
     @Test
     public void moveOneRoverToRM() throws Exception {
-        List<Rover> expectedRovers = singletonList(new Rover(new Position("1 0"), CardinalPoint.E, Collections.emptyList()));
+        List<Rover> expectedRovers = singletonList(new Rover(new Position("1 0"), Direction.E, Collections.emptyList()));
 
         List<String> inputExplorationPlan = createInputExplorationPlan("RM", "0 0 N", "2 2");
         Plateau plateau = new Plateau(inputExplorationPlan);
@@ -41,7 +45,7 @@ public class PlateauTest {
 
     @Test
     public void moveOneRoverToLM() throws Exception {
-        List<Rover> expectedRovers = singletonList(new Rover(new Position("0 0"), CardinalPoint.W, Collections.emptyList()));
+        List<Rover> expectedRovers = singletonList(new Rover(new Position("0 0"), Direction.W, Collections.emptyList()));
 
         List<String> inputExplorationPlan = createInputExplorationPlan("LM", "1 0 N", "2 2");
         Plateau plateau = new Plateau(inputExplorationPlan);
@@ -53,7 +57,7 @@ public class PlateauTest {
 
     @Test
     public void exploresOneRoverToLM() throws Exception {
-        List<Rover> expectedRovers = singletonList(new Rover(new Position("1 3"), CardinalPoint.N, Collections.emptyList()));
+        List<Rover> expectedRovers = singletonList(new Rover(new Position("1 3"), Direction.N, Collections.emptyList()));
 
         List<String> inputExplorationPlan = createInputExplorationPlan("LMLMLMLMM", "1 2 N", "5 5");
         Plateau plateau = new Plateau(inputExplorationPlan);
@@ -65,9 +69,9 @@ public class PlateauTest {
 
     @Test
     public void exploresTwoRoversWithSomeMoves() throws Exception {
-        Rover firstExpectedRover = new Rover(new Position("1 3"), CardinalPoint.N, Collections.emptyList());
-        Rover secondExpectedRover = new Rover(new Position("5 1"), CardinalPoint.E, Collections.emptyList());
-        List<Rover> expectedRovers = Arrays.asList(firstExpectedRover, secondExpectedRover);
+        Rover firstExpectedRover = new Rover(new Position("1 3"), Direction.N, Collections.emptyList());
+        Rover secondExpectedRover = new Rover(new Position("5 1"), Direction.E, Collections.emptyList());
+        List<Rover> expectedRovers = asList(firstExpectedRover, secondExpectedRover);
 
         List<String> inputLines = new ArrayList<>();
         inputLines.add("5 5");
@@ -85,8 +89,8 @@ public class PlateauTest {
 
     @Test
     public void exploresOneRoversWithSomeMoves() throws Exception {
-        Rover secondExpectedRover = new Rover(new Position("5 1"), CardinalPoint.E, Collections.emptyList());
-        List<Rover> expectedRovers = Arrays.asList(secondExpectedRover);
+        Rover secondExpectedRover = new Rover(new Position("5 1"), Direction.E, Collections.emptyList());
+        List<Rover> expectedRovers = asList(secondExpectedRover);
 
         List<String> inputLines = new ArrayList<>();
         inputLines.add("5 5");

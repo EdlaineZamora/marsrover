@@ -63,10 +63,10 @@ public class RoverCollection {
         return movimentsGroup;
     }
 
-    private CardinalPoint extractCardinalPoint(String positionElements) {
+    private Direction extractCardinalPoint(String positionElements) {
         String cardinalPointLetter = positionElements.replaceAll(ONLY_LETTERS_PATTERN, EMPTY);
 
-        return CardinalPoint.valueOf(cardinalPointLetter);
+        return Direction.valueOf(cardinalPointLetter);
     }
 
 }
